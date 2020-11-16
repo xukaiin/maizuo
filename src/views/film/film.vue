@@ -1,8 +1,12 @@
 
 <template>
   <div>
-    <!-- 整体的路由 -->
-    <comfootnav></comfootnav>
+    <h1>film</h1>
+    <button @click="aaa">请求原来官网数据</button>
+    <div v-for="(item, index) in data1" :key="index">
+      <h1>{{ item.name }}</h1>
+      <img :src="item.imgUrl" alt="" />
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -10,10 +14,10 @@
 
 
 <script>
-import comfootnav from "../src/components/comfootnav";
+import axios from "axios";
 export default {
   //组件名字
-  name: "app",
+  name: "film",
   //接收父组件给的东西 type是接收什么东西  default 默认值
   props: {
     list: {
@@ -28,17 +32,20 @@ export default {
     },
   },
   //组件注册
-  components: {
-    comfootnav,
-  },
+  components: {},
   // vue数据集中管理
   data() {
     return {
       value: "1",
+      data1: [],
     };
   },
   //方法 函数写这里
-  methods: {},
+  methods: {
+    aaa() {
+      
+    },
+  },
   //计算属性
   computed: {},
   //侦听器
@@ -57,7 +64,29 @@ export default {
   //页面渲染之前
   beforeMount() {},
   //页面渲染之后
-  mounted() {},
+  mounted() {
+    axios.interceptors.request.use(
+        function (config) {
+          config.headers = {
+            "X-Client-Info":
+              '{"a":"3000","ch":"1002","v":"5.0.4","e":"1605418550380220569812993"}',
+            "X-Host": "mall.cfg.film-float.banner",
+          };
+          return config;
+        },
+        function (err) {
+          if (err) {
+            console.log("err" + err);
+          }
+        }
+      );
+      axios
+        .get("https://m.maizuo.com/gateway?cityId=310100&k=2772115")
+        .then((data) => {
+          console.log(data.data);
+          this.data1 = data.data;
+        });
+  },
   //页面销毁之前
   beforeDestroy() {},
   //页面销毁之后
@@ -85,20 +114,9 @@ export default {
 </script>
 
 
-
-
-
-<style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-}
-html,body{
-  touch-action: none;
-  height: 100%;
-  ul,li{
-    list-style: none;
-  }
+<style scoped lang="scss">
+img {
+  width: 100%;
 }
 </style>
 

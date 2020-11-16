@@ -1,19 +1,16 @@
 
 <template>
   <div>
-    <!-- 整体的路由 -->
-    <comfootnav></comfootnav>
-    <router-view></router-view>
+    <h1>comingsoon</h1>
   </div>
 </template>
 
 
 
 <script>
-import comfootnav from "../src/components/comfootnav";
 export default {
   //组件名字
-  name: "app",
+  name: "comingsoon",
   //接收父组件给的东西 type是接收什么东西  default 默认值
   props: {
     list: {
@@ -28,9 +25,7 @@ export default {
     },
   },
   //组件注册
-  components: {
-    comfootnav,
-  },
+  components: {},
   // vue数据集中管理
   data() {
     return {
@@ -85,21 +80,7 @@ export default {
 </script>
 
 
-
-
-
-<style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-}
-html,body{
-  touch-action: none;
-  height: 100%;
-  ul,li{
-    list-style: none;
-  }
-}
+<style scoped lang="scss">
 </style>
 
 
