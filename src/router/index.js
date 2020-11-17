@@ -9,8 +9,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: () => import('../views/film/film.vue'),
-    // redirect: '/film'
+    // component: () => import('../views/film'),
+    redirect: '/film/nowplaying'
 
   },
   center,

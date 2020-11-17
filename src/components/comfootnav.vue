@@ -105,6 +105,11 @@ export default {
   left: 0;
   width: 100%;
   text-align: center;
+  border-top: 1px solid #ccc;
+  height: 50px;
+  text-align: center;
+  background: #fff;
+  color: #7a7e83;
 }
 ul {
   display: flex;

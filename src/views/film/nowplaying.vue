@@ -1,13 +1,25 @@
 
 <template>
   <div>
-    <h1>nowplaying</h1>
+    <!-- <h1>nowplaying</h1> -->
+    <comfilmlist v-if="flag" :list1="list1" :type="type"></comfilmlist>
+    <div>
+      <!-- <h3 v-for="(item, index) in arr" :key="index">{{ item }}</h3> -->
+      <!-- <h3 v-for="(value, key, index) in obj" :key="index">{{ value }}</h3> -->
+      <!-- <h3 v-for="(item, index) in items" :key="index">
+        {{item.name}}
+        <h3 v-for="itemm in item.item2" :key="itemm.id">{{ itemm.text }}</h3>
+      </h3> -->
+    </div>
   </div>
 </template>
 
 
 
 <script>
+import comfilmlist from "@/components/comfilmlist";
+import { nowplayingListData } from "@/api/api";
+
 export default {
   //组件名字
   name: "nowplaying",
@@ -25,11 +37,46 @@ export default {
     },
   },
   //组件注册
-  components: {},
+  components: { comfilmlist },
   // vue数据集中管理
   data() {
     return {
-      value: "1",
+      flag: true,
+      list1: [],
+      page: 1,
+      type: 1,
+      // value: "1",
+      // arr: [1, 2, 3],
+      // obj: {
+      //   x: "a1",
+      //   y: "b1",
+      // },
+      // items: [
+      //   {
+      //     id: 1,
+      //     name: "可乐",
+      //     item2: [
+      //       { id: 4, text: "冷冻可乐" },
+      //       { id: 5, text: "香草可乐" },
+      //     ],
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "雪碧",
+      //     item2: [
+      //       { id: 6, text: "冷冻雪碧" },
+      //       { id: 7, text: "青柠雪碧" },
+      //     ],
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "橙子",
+      //     item2: [
+      //       { id: 8, text: "冷冻橙子" },
+      //       { id: 9, text: "新鲜橙子" },
+      //     ],
+      //   },
+      // ],
     };
   },
   //方法 函数写这里
@@ -52,7 +99,11 @@ export default {
   //页面渲染之前
   beforeMount() {},
   //页面渲染之后
-  mounted() {},
+  async mounted() {
+    let ret = await nowplayingListData(this.page);
+    this.list1 = ret.data.data.films;
+    // console.log(ret.data.data.films);
+  },
   //页面销毁之前
   beforeDestroy() {},
   //页面销毁之后

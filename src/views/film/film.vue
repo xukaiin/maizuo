@@ -1,12 +1,12 @@
 
 <template>
   <div>
-    <h1>film</h1>
-    <button @click="aaa">请求原来官网数据</button>
+    <comfilmlistnav></comfilmlistnav>
+    <!-- <button @click="aaa">请求原来官网数据</button>
     <div v-for="(item, index) in data1" :key="index">
       <h1>{{ item.name }}</h1>
       <img :src="item.imgUrl" alt="" />
-    </div>
+    </div> -->
     <router-view></router-view>
   </div>
 </template>
@@ -14,6 +14,7 @@
 
 
 <script>
+import comfilmlistnav from "../../components/comfilmlistnav.vue";
 import axios from "axios";
 export default {
   //组件名字
@@ -32,7 +33,7 @@ export default {
     },
   },
   //组件注册
-  components: {},
+  components: { comfilmlistnav },
   // vue数据集中管理
   data() {
     return {
@@ -42,9 +43,7 @@ export default {
   },
   //方法 函数写这里
   methods: {
-    aaa() {
-      
-    },
+    aaa() {},
   },
   //计算属性
   computed: {},
@@ -65,27 +64,27 @@ export default {
   beforeMount() {},
   //页面渲染之后
   mounted() {
-    axios.interceptors.request.use(
-        function (config) {
-          config.headers = {
-            "X-Client-Info":
-              '{"a":"3000","ch":"1002","v":"5.0.4","e":"1605418550380220569812993"}',
-            "X-Host": "mall.cfg.film-float.banner",
-          };
-          return config;
-        },
-        function (err) {
-          if (err) {
-            console.log("err" + err);
-          }
-        }
-      );
-      axios
-        .get("https://m.maizuo.com/gateway?cityId=310100&k=2772115")
-        .then((data) => {
-          console.log(data.data);
-          this.data1 = data.data;
-        });
+    //   axios.interceptors.request.use(
+    //       function (config) {
+    //         config.headers = {
+    //           "X-Client-Info":
+    //             '{"a":"3000","ch":"1002","v":"5.0.4","e":"1605418550380220569812993"}',
+    //           "X-Host": "mall.cfg.film-float.banner",
+    //         };
+    //         return config;
+    //       },
+    //       function (err) {
+    //         if (err) {
+    //           console.log("err" + err);
+    //         }
+    //       }
+    //     );
+    //     axios
+    //       .get("https://m.maizuo.com/gateway?cityId=310100&k=2772115")
+    //       .then((data) => {
+    //         console.log(data.data);
+    //         this.data1 = data.data;
+    //       });
   },
   //页面销毁之前
   beforeDestroy() {},
