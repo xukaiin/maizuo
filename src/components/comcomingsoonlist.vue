@@ -3,12 +3,7 @@
   <div>
     <comloading v-if="!flag"></comloading>
     <div v-if="flag" class="content">
-      <div
-        class="item"
-        v-for="(item, index) in list1"
-        :key="index"
-        @click="todetail(item.filmId)"
-      >
+      <div class="item" v-for="(item, index) in list1" :key="index">
         <div class="left">
           <img :src="item.poster" />
         </div>
@@ -27,10 +22,10 @@
               >{{ items.name }}
             </span>
           </div>
-          <div>{{ item.nation }} | {{ item.runtime }}分钟</div>
+          <div>上映日期: {{ item.premiereAt | date }}</div>
         </div>
         <div class="right">
-          <span>购票</span>
+          <span>预购</span>
         </div>
       </div>
     </div>
@@ -41,6 +36,7 @@
 
 <script>
 import comloading from "@/components/comloading.vue";
+import moment from "moment";
 export default {
   //组件名字
   name: "filmlist",
@@ -55,7 +51,6 @@ export default {
     color: {
       type: String,
       default: "#000",
-      
     },
   },
   //组件注册
@@ -64,20 +59,14 @@ export default {
   data() {
     return {
       value: "1",
-      
     };
   },
   //方法 函数写这里
-  methods: {
-    todetail(filmId) {
-      console.log(filmId);
-      this.$router.push({ name: "detail", params: { filmId } });
-    },
-  },
+  methods: {},
   //计算属性
   computed: {
     flag() {
-      // console.log("computed in filmlist");
+      //   console.log("computed in filmlist");
       console.log(this.list1);
       return this.list1[0];
     },
@@ -88,6 +77,22 @@ export default {
   filters: {
     toUpcase(value) {
       return value ? value.toUpperCase() : "";
+    },
+    //时间戳
+    // formatDate(timestamp) {
+    //   var weekarr = ["日", "一", "二", "三", "四", "五", "六"];
+    //   var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    //   var M =
+    //     date.getMonth() + 1 < 10
+    //       ? "0" + (date.getMonth() + 1)
+    //       : date.getMonth() + 1;
+    //   var D = date.getDate();
+    //   var W = weekarr[date.getDay()] + " ";
+    //   return "周" + W + M + "月" + D + "日";
+    // },
+    date(value) {
+      moment.locale("zh-cn");
+      return moment(value * 1000).format("ddd MMMDo");
     },
   },
   //以下是生命周期
@@ -188,9 +193,9 @@ export default {
     margin-right: 20px;
 
     span {
-      border: 1px solid #ff5f16;
+      border: 1px solid #ffb232;
       background: white;
-      color: #ff5f16;
+      color: #ffb232;
       border-radius: 2px;
       height: 25px;
       line-height: 25px;

@@ -1,6 +1,6 @@
 
 <template>
-  <nav>
+  <nav :class="(fixed = flag ? 'fixed' : '')">
     <ul>
       <router-link to="/film/nowplaying" tag="li" active-class="active">
         <span>正在热映</span>
@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       value: "1",
+      flag: false,
     };
   },
   //方法 函数写这里
@@ -59,7 +60,21 @@ export default {
   //页面渲染之前
   beforeMount() {},
   //页面渲染之后
-  mounted() {},
+  mounted() {
+    window.addEventListener(
+      "scroll",
+      () => {
+        let top = document.documentElement.scrollTop;
+        if (top > 200) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+      },
+      true
+    );
+  },
+
   //页面销毁之前
   beforeDestroy() {},
   //页面销毁之后
@@ -92,6 +107,8 @@ export default {
 
 <style lang="scss" scoped>
 nav {
+  top: 0;
+  background: #fff;
   width: 100%;
   height: 50px;
   line-height: 50px;
@@ -105,7 +122,7 @@ nav {
       justify-content: center;
       &.active {
         span {
-        //   width: 40%;
+          //   width: 40%;
           border-bottom: 2px solid red;
           display: block;
           color: #fe5100;
@@ -113,6 +130,9 @@ nav {
       }
     }
   }
+}
+.fixed {
+  position: fixed;
 }
 </style>
 
