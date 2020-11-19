@@ -18,11 +18,30 @@
           <div>{{ film.category }}</div>
           <div>{{ film.premiereAt | timeparser }}上映</div>
           <div>{{ film.nation }} | {{ film.runtime }} 分钟</div>
-          <div :class="[more, synopsiscss]" :style="{ height: ` ${height} ` }">
+          <div
+            :class="[more, synopsiscss]"
+            :style="{ height: ` ${height} ` }"
+            ref="synopsisdom"
+          >
             {{ film.synopsis }}
           </div>
           <div class="toggle" :class="srcdown" @click="down">
             <img :src="srcup" alt="" class="" />
+          </div>
+        </div>
+        <div class="actors">
+          <p>演职人员</p>
+          <div class="dabox">
+            <comswiper :key="film.actors.length">
+              <div
+                v-for="(item, index) in film.actors"
+                :key="index"
+                class="swiper-slide img"
+              >
+                <img v-lazy="item.avatarAddress" alt="" />
+              </div>
+              
+            </comswiper>
           </div>
         </div>
       </div>
@@ -35,6 +54,7 @@
 import comloading from "../../components/comloading";
 import moment from "moment";
 import { filmDetail } from "../../api/api";
+import comswiper from "../../components/comswiper";
 export default {
   //组件名字
   name: "detail",
@@ -52,12 +72,12 @@ export default {
     },
   },
   //组件注册
-  components: { comloading },
+  components: { comloading, comswiper },
   // vue数据集中管理
   data() {
     return {
       value: "1",
-      synopsiscss: "synopsis",
+      synopsiscss: "",
       synopsis: "",
       height: "",
       film: {},
@@ -99,7 +119,10 @@ export default {
   //组件创建之前  new操作符桥梁函数return 之前
   beforeCreate() {},
   //组件创建之后
-  created() {},
+  created() {
+    this.eventBus.$emit("footernav", false);
+    this.eventBus.$emit("rocket1", "向日葵");
+  },
   //页面渲染之前
   beforeMount() {},
   //页面渲染之后
@@ -109,15 +132,21 @@ export default {
     // console.log(ret.data.data.film);
     this.film = ret.data.data.film;
     this.filmtype = ret.data.data.film.item;
-    this.synopsis = ret.data.data.film.synopsis;
-    var arr = this.synopsis.split("");
-    let height = Math.ceil(arr.length / 25) * 17;
+    // this.synopsis = ret.data.data.film.synopsis;
+    // var arr = this.synopsis.split("");
+    await this.$refs.synopsisdom;
+    // let height = Math.ceil(arr.length / 25) * 16.6;
+    let height = this.$refs.synopsisdom.offsetHeight;
     this.height = height + "px";
+    this.synopsiscss = "synopsis";
+    console.log(this.film);
   },
   //页面销毁之前
   beforeDestroy() {},
   //页面销毁之后
-  destroyed() {},
+  destroyed() {
+    this.eventBus.$emit("footernav", true);
+  },
   //页面视图数据更新之前
   beforeUpdate() {},
   //页面视图数据更新之后
@@ -207,22 +236,64 @@ export default {
       }
     }
   }
+  .actors {
+    background-color: red;
+    margin-top: 10px;
+
+    p {
+      font-size: 16px;
+      text-align: left;
+      color: #191a1b;
+      height: 22.5px;
+      line-height: 22px;
+      padding: 15px;
+    }
+    img {
+      width: 80px;
+    }
+
+    .img {
+      width: 85px;
+      height: 85px;
+      background: rgb(249, 249, 249);
+      opacity: 1;
+      display: block;
+      margin-right: 10px;
+      img {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+      }
+    }
+  }
 }
 .more {
-  margin-top: 10px;
+  margin-top: 10px !important;
   overflow: hidden;
-
   transition: height 0.5s ease;
 }
 .less {
-  margin-top: 10px;
+  margin-top: 10px !important;
   overflow: hidden;
-
   height: 35px !important;
   transition: height 0.5s ease;
 }
 .srcdown {
+  margin-top: 6px !important;
   transform: rotate(180deg);
+}
+.itemname {
+  margin-top: 100px;
+  position: relative;
+  .actorsname {
+    color: #000;
+
+    display: block;
+    position: relative;
+  }
+  .actorsrole {
+    display: block;
+  }
 }
 </style>
 

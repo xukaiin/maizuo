@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 整体的路由 -->
-    <comfootnav></comfootnav>
+    <comfootnav v-if="is_show"></comfootnav>
     <router-view></router-view>
   </div>
 </template>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       value: "1",
+      is_show: "true",
     };
   },
   //方法 函数写这里
@@ -53,7 +54,14 @@ export default {
   //组件创建之前  new操作符桥梁函数return 之前
   beforeCreate() {},
   //组件创建之后
-  created() {},
+  created() {
+    this.eventBus.$on("footernav", (ele) => {
+      this.is_show = ele;
+    });
+    // this.eventBus.$on("rocket1", (ele) => {
+    //   console.log(ele);
+    // });
+  },
   //页面渲染之前
   beforeMount() {},
   //页面渲染之后
@@ -98,6 +106,7 @@ html,
 body {
   touch-action: none;
   height: 100%;
+  // background-color: lightgray;
   ul,
   li {
     list-style: none;
