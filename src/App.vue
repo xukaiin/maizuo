@@ -104,9 +104,9 @@ export default {
 }
 html,
 body {
-  touch-action: none;
+  // touch-action: none;
   height: 100%;
-  // background-color: lightgray;
+  background-color: lightgray;
   ul,
   li {
     list-style: none;

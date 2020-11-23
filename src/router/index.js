@@ -4,6 +4,7 @@ import center from '@/router/routes/center.js'
 import film from '@/router/routes/film.js'
 import cinema from '@/router/routes/cinema.js'
 import detail from '@/router/routes/detail.js'
+import city from '@/router/routes/city.js'
 
 Vue.use(VueRouter)
 
@@ -17,7 +18,8 @@ const routes = [
   center,
   film,
   cinema,
-  detail
+  detail,
+  city
 ]
 const router = new VueRouter({
   mode: 'history',

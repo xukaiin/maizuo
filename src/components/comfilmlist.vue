@@ -92,16 +92,18 @@ export default {
     async getData() {
       // console.log("getdata in filmlist");
       if (this.moreflag) {
+        this.moreflag = false;
         this.page++;
         if (this.type == 1) {
           var ret = await nowplayingListData(this.page);
-          // console.log(this.page);
+          console.log(this.page);
           // console.log(ret.data.data.films);
         } else {
           var ret = await comingsoonListData(this.page);
         }
+        this.moreflag = true;
         if (ret.data.data.films.length < 10) {
-          this.flag = this.moreflag;
+          this.moreflag = false;
         }
         // console.log(ret);
         this.data = this.data.concat(ret.data.data.films);
@@ -148,8 +150,8 @@ export default {
     //   },
     //   true
     // ),
-      // console.log("mounted in filmlist");
-      console.log(this.list1);
+    // console.log("mounted in filmlist");
+    console.log(this.list1);
     this.height = document.documentElement.clientHeight - 100;
   },
   //页面销毁之前
@@ -161,13 +163,34 @@ export default {
   //页面视图数据更新之后
   updated() {
     //new 得到better scroll的全部能力
-    this.bs = new BScroll(".scroll", {
-      pullUpLoad: true,
-      // 激活下滑的事件监听
-      pullDownRefresh: true,
-      // 它会禁止一些浏览器的事件
-      click: true,
-    });
+    // this.bs = new BScroll(".scroll", {
+    //   pullUpLoad: true,
+    //   // 激活下滑的事件监听
+    //   pullDownRefresh: true,
+    //   // 它会禁止一些浏览器的事件
+    //   click: true,
+    // });
+
+    //第二种
+    //new 得到better scroll的全部能力
+    //如果没有 this.bs没有 new BScroll给的全部的能力 就执行一次 如果有  为了防止容器刷新 不在新new了
+    if (!this.bs) {
+      this.bs = new BScroll(".scroll", {
+        pullUpLoad: true,
+        // 激活下滑的事件监听
+        pullDownRefresh: true,
+        mouseWheel: true,
+        // 它会禁止一些浏览器的事件
+        click: true,
+        pullUpLoad: {
+          threshold: -20,
+        },
+      });
+    } else {
+      //如果已经有了 new BScroll给的全部能力 我就不继续 new 新的了 以防止重新渲染容器
+      //this.bs.refresh()意思是  正常运转 已有的容器
+      this.bs.refresh();
+    }
     this.bs.on("pullingUp", () => {
       // 获取数据
       this.getData();

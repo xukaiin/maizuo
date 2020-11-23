@@ -4,3 +4,10 @@ export const nowplayingListUrl = "/gateway?cityId=110100&pageSize=10&type=1&k=51
 export const comingsoonListUrl = "/gateway?cityId=110100&pageSize=10&type=2&k=5155219&pageNum=";
 //电影详情
 export const moiveDetailUrl = "gateway?k=3633812&filmId=";
+// 城市列表数据
+export const cityListUrl = "gateway?k=3233761";
+//影院列表
+// let cityId = '310100';
+// export const cinemaListUrl = `gateway?cityId=${cityId}&k=8975302`;
+
+

@@ -1,31 +1,21 @@
 
 <template>
-  <div id="nav">
-    <ul>
-      <router-link to="/film" active-class="active" tag="li">
-        <i class="iconfont icon-dianying1"></i>
-        <p>电影</p>
-      </router-link>
-      <router-link to="/cinema" active-class="active" tag="li">
-        <i class="iconfont icon-yingyuan"></i>
-        <p>影院</p>
-      </router-link>
-      <router-link to="/center" active-class="active" tag="li">
-        <i class="iconfont icon-wode1"></i>
-        <p>我的</p></router-link
-      >
-    </ul>
+  <div class="cinemanav">
+    <div class="city">
+      <span @click="aaa"> {{ this.$store.state.city }}</span>
+      <span class="iconfont icon-xiasanjiao"></span>
+    </div>
+    <span class="title">影院</span>
+    <span class="iconfont icon-sousuo"></span>
   </div>
 </template>
 
 
 
 <script>
-//引入iconfont
-import "../assets/iconfont/iconfont.css";
 export default {
   //组件名字
-  name: "comfootnav",
+  name: "comcinemanav",
   //接收父组件给的东西 type是接收什么东西  default 默认值
   props: {
     list: {
@@ -48,7 +38,11 @@ export default {
     };
   },
   //方法 函数写这里
-  methods: {},
+  methods: {
+    aaa() {
+      this.$router.push("/city");
+    },
+  },
   //计算属性
   computed: {},
   //侦听器
@@ -99,37 +93,32 @@ export default {
 
 
 <style lang="scss" scoped>
-#nav {
-  z-index: 999;
+.cinemanav {
   position: fixed;
-  bottom: 0;
-  left: 0;
+  top: 0;
+  z-index: 999;
   width: 100%;
-  text-align: center;
-  border-top: 1px solid #ccc;
-  height: 50px;
-  text-align: center;
-  background: #fff;
-  color: #7a7e83;
-}
-ul {
-  display: flex;
-  padding-bottom: 5px;
+  height: 44px;
   background-color: #fff;
-  li {
+  display: flex;
+  align-items: center;
+  .city {
+    margin-left: 10px;
+    font-size: 13px;
+    .iconfont {
+      font-size: 11px;
+    }
+  }
+  .title {
     flex: 1;
-    height: 43px;
-    margin-top: 5px;
+    text-align: center;
+    margin-right: 30px;
   }
-  p {
-    margin-top: 2px;
-  }
-  i {
+  .icon-sousuo {
+    position: absolute;
+    right: 10px;
     font-size: 20px;
   }
-}
-.active {
-  color: #fe5100;
 }
 </style>
 

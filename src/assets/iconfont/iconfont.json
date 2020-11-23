@@ -1,10 +1,24 @@
 {
   "id": "2207354",
-  "name": "no name",
+  "name": "maizuo",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "12270390",
+      "name": "下三角",
+      "font_class": "xiasanjiao",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "17967783",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
     {
       "icon_id": "5527753",
       "name": "资讯",

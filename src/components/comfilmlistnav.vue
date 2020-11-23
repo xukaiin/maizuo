@@ -1,6 +1,6 @@
 
 <template>
-  <nav :class="(fixed = flag ? 'fixed' : '')">
+  <nav :class="(fixed = fixedflag ? 'fixed' : '')">
     <ul>
       <router-link to="/film/nowplaying" tag="li" active-class="active">
         <span>正在热映</span>
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       value: "1",
-      flag: false,
+      fixedflag: false,
     };
   },
   //方法 函数写这里
@@ -66,9 +66,9 @@ export default {
       () => {
         let top = document.documentElement.scrollTop;
         if (top > 200) {
-          this.flag = true;
+          this.fixedflag = true;
         } else {
-          this.flag = false;
+          this.fixedflag = false;
         }
       },
       true

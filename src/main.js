@@ -6,6 +6,10 @@ import Router from 'vue-router'
 Vue.config.productionTip = false
 //懒加载
 import VueLazyload from 'vue-lazyload'
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 
 
 
