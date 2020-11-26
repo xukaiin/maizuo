@@ -15,6 +15,16 @@ const routes = [
     redirect: '/film/nowplaying'
 
   },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/login/register.vue'),
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login/login.vue'),
+  },
   center,
   film,
   cinema,

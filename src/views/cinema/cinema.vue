@@ -179,7 +179,7 @@ export default {
       margin-top: 5px;
       font-size: 11px;
       color: #797d82;
-      text-align: center;
+      text-align: right;
     }
   }
 }

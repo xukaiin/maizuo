@@ -52,7 +52,7 @@ export default {
       // this.eventBus.$emit("cityId", cityId);
       this.$store.commit("add", name);
       this.$store.commit("add1", cityId);
-      this.$router.push("/cinema");
+      this.$router.push(this.$router.go(-1));
     },
   },
   //计算属性
@@ -76,6 +76,7 @@ export default {
   beforeMount() {},
   //页面渲染之后
   async mounted() {
+    window.scroll(0, 0);
     let ret = await cityListData();
     let cities = ret.data.data.cities;
     // console.log(city);
@@ -117,6 +118,7 @@ export default {
 
   //组件路由守卫enter
   beforeRouteEnter(to, from, next) {
+    console.log(from);
     next((vm) => {});
     // 注意，在路由进入之前，组件实例还未渲染，所以无法获取this实例，只能通过vm来访问组件实例
   },
@@ -127,7 +129,6 @@ export default {
   },
   //组件路由守卫离开
   beforeRouteLeave(to, from, next) {
-    // 离开当前路由页面时调用
     next();
   },
 };

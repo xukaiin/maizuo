@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     city: '上海',
     cityId: 310100,
+    mobile: '请登录',
   },
   mutations: {
     add(state, step) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
       console.log('cityid', cityid)
       state.cityId = cityid
     },
+    addmobile(state,mobile) {
+      state.mobile = mobile
+    }
   },
   actions: {
   },

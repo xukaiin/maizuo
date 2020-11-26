@@ -106,7 +106,7 @@ html,
 body {
   // touch-action: none;
   height: 100%;
-  background-color: lightgray;
+  background-color: rgb(238, 235, 235);
   ul,
   li {
     list-style: none;

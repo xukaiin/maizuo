@@ -8,6 +8,8 @@ export const moiveDetailUrl = "gateway?k=3633812&filmId=";
 export const cityListUrl = "gateway?k=3233761";
 //影院列表
 // let cityId = '310100';
-// export const cinemaListUrl = `gateway?cityId=${cityId}&k=8975302`;
+export const cinemaListUrl = 'gateway?k=8975302&cityId=';
 
+
+export const loginUrl = "http://127.0.0.1:3005/login";
 
