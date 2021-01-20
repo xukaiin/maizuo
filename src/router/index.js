@@ -25,6 +25,11 @@ const routes = [
     name: 'login',
     component: () => import('../views/login/login.vue'),
   },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('../views/test.vue'),
+  },
   center,
   film,
   cinema,
