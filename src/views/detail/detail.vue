@@ -6,25 +6,6 @@
     </div>
     <div v-if="isload" class="detail">
       <div class="goBack" @click="goback">
-        <img :src="gobacksrc" />
-      </div>
-      <div>
-        <div class="img">
-          <img :src="film.poster" />
-        </div>
-        <div class="film-detail">
-          <p class="grade">
-            <span>{{ film.grade }}</span>
-            <span>分</span>
-          </p>
-          <div>
-            <span class="name">{{ film.name }}</span>
-            <!-- <span class="type">{{ filmtype.name }}</span> -->
-            <span class="type">{{ filmtype.name }}</span>
-          </div>
-
-          <div>{{ film.category }}</div>
-
           <div>{{ film.premiereAt | timeparser }}上映</div>
           <div>{{ film.nation }} | {{ film.runtime }} 分钟</div>
           <div
